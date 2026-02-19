@@ -9,7 +9,10 @@ on:
 jobs:
   eslint:
     runs-on: ubuntu-latest
-    name: ESLint
+
+    defaults:
+      run:
+        working-directory: api
 
     steps:
       - name: Checkout
@@ -23,9 +26,7 @@ jobs:
           cache-dependency-path: api/package-lock.json
 
       - name: Install dependencies
-        working-directory: api
         run: npm ci
 
       - name: Run ESLint
-        working-directory: api
         run: npm run lint
