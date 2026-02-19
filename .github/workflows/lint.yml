@@ -1,0 +1,23 @@
+name: ESLint
+
+on:
+  push:
+    paths:
+      - ".github/workflows/lint.yml"
+
+jobs:
+  ESLint:
+    runs-on: ubuntu-latest
+    name: ESLint
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm ci
+
+      - name: ESLint
+        run: npm run lint
