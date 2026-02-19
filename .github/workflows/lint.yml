@@ -3,10 +3,11 @@ name: ESLint
 on:
   push:
     paths:
+      - "api/**"
       - ".github/workflows/lint.yml"
 
 jobs:
-  ESLint:
+  eslint:
     runs-on: ubuntu-latest
     name: ESLint
 
@@ -14,10 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          npm install
-          npm ci
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: api/package-lock.json
 
-      - name: ESLint
+      - name: Install dependencies
+        working-directory: api
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: api
         run: npm run lint
