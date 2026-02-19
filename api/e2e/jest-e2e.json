@@ -1,0 +1,9 @@
+{
+  "moduleFileExtensions": ["js"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".e2e.js$",
+  "transformIgnorePatterns": [
+    "node_modules/(?!@faker-js/faker)"
+  ]
+}
